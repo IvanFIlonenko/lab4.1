@@ -9,6 +9,9 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SolveTestActor extends AbstractActor {
 
@@ -28,8 +31,10 @@ public class SolveTestActor extends AbstractActor {
                 params += pack.getTests()[index].getParams()[i] + ",";
             }
             params = params.substring(0, params.length()-1);
-
-            String res = invocable.invokeFunction(pack.getFunctionName(), Object[] pack.getTests()[index].getParams()).toString();
+            Object[] obj = new Object;
+            List<Object> objectList = new ArrayList<Object>();
+            objectList.add(Arrays.asList(pack.getTests()[index].getParams()));
+            String res = invocable.invokeFunction(pack.getFunctionName(), Object[] ).toString();
             pack.writeResult(index, res);
             System.out.println(res);
             getSender().tell(pack, ActorRef.noSender());
