@@ -3,6 +3,7 @@ package lab4;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.actor.Props;
+import akka.japi.pf.ReceiveBuilder;
 import akka.routing.RoundRobinPool;
 
 public class Manager extends AbstractActor {
@@ -15,7 +16,7 @@ public class Manager extends AbstractActor {
     }
 
     public Receive createReceive() {
-        return receiveBuilder().create().match(JsonPackage.class, pack -> {
+        return ReceiveBuilder.create().match(JsonPackage.class, pack -> {
             for(int i=0; i<pack.getTests().length; i++){
                 executors.tell(new Message(i,pack), storage);
             }
