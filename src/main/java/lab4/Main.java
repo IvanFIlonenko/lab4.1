@@ -50,7 +50,7 @@ public class Main extends AllDirectives {
                 get(
                         () -> parameter("packageId", (packageId)->
                         {
-                            Future<Object> result = Patterns.ask(manager, packageId, 5000);
+                            Future<Object> result = Patterns.ask(manager, new GetResult(Integer.parseInt(packageId)), 5000);
                             return completeOKWithFuture(result,Jackson.marshaller());
                         })
                 ),
