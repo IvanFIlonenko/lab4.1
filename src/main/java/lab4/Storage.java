@@ -7,13 +7,13 @@ import akka.japi.pf.ReceiveBuilder;
 import java.util.*;
 
 public class Storage extends AbstractActor {
-    private ArrayList<JsonPackage> data = new ArrayList<>();
+    private HashMap<Integer,JsonPackage> data = new HashMap<>();
 
     public Receive createReceive() {
         return ReceiveBuilder.create().match(GetResult.class,
                 request -> getSender().tell(data.get(request.getPackageId()), ActorRef.noSender()))
                 .match(JsonPackage.class, pack -> {
-                    data.add(pack);
+                    data.put(pack.getPackageId(), pack);
                 })
                 .build();
     }
