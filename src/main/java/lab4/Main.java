@@ -50,7 +50,6 @@ public class Main extends AllDirectives {
                 get(
                         () -> parameter("packageId", (packageId)->
                         {
-                            manager.tell(new GetResult(Integer.parseInt(packageId)), ActorRef.noSender());
                             Future<Object> result = Patterns.ask(manager, new GetResult(Integer.parseInt(packageId)), 5000);
                             return completeOKWithFuture(result,Jackson.marshaller());
                         })
