@@ -31,7 +31,7 @@ public class SolveTestActor extends AbstractActor {
                 pack.writeCheck(index);
             }
             pack.writeResult(index, res);
-            getSender().tell(pack, ActorRef.noSender());
+            getSender().tell(pack.getTests(), ActorRef.noSender());
         }).build();
     }
 }
