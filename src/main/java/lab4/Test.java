@@ -8,6 +8,7 @@ class Test {
     private final float expectedResult;
     private final Object[] params;
     private String result;
+    private String check;
 
     @JsonCreator
     public Test(@JsonProperty("testName") String testName,
@@ -17,6 +18,7 @@ class Test {
         this.expectedResult = Float.parseFloat(expectedResult);
         this.params = params;
         this.result = "NONE";
+        this.check = "false";
     }
 
     public String getTestName(){
@@ -36,4 +38,6 @@ class Test {
     }
 
     public String getResult(){return this.result;}
+
+    public String getCheck(){return this.check;}
 }
