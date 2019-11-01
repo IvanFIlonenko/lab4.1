@@ -34,4 +34,6 @@ class Test {
     public void writeResult(String result){
         this.result = result;
     }
+
+    public String getResult(){return this.result;}
 }
