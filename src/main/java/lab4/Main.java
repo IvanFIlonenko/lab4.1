@@ -38,7 +38,7 @@ public class Main extends AllDirectives {
                         () -> entity(Jackson.unmarshaller(JsonPackage.class),
                                 message -> {
                                     manager.tell(message, ActorRef.noSender());
-                                    return complete("");
+                                    return complete("You sent successfully!");
                                 }
                         )
                 )
