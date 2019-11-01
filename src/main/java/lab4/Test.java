@@ -39,5 +39,7 @@ class Test {
 
     public String getResult(){return this.result;}
 
+    public void writeCheck(){this.check = "true";}
+
     public String getCheck(){return this.check;}
 }
