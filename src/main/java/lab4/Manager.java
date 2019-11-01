@@ -15,7 +15,7 @@ public class Manager extends AbstractActor {
     }
 
     public Receive createReceive() {
-        return receiveBuilder().match(JsonPackage.class, pack -> {
+        return receiveBuilder().create().match(JsonPackage.class, pack -> {
             for(int i=0; i<pack.getTests().length; i++){
                 executors.tell(new Message(i,pack), storage);
             }
