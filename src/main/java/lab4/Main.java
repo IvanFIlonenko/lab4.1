@@ -65,7 +65,7 @@ public class Main extends AllDirectives {
         );
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create("routes");
         manager = system.actorOf(Props.create(Manager.class));
 
