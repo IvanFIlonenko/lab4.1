@@ -13,7 +13,6 @@ public class Storage extends AbstractActor {
         return ReceiveBuilder.create().match(GetResult.class,
                 request -> getSender().tell(data.get(request.getPackageId()), ActorRef.noSender()))
                 .match(JsonPackage.class, pack -> {
-
                     data.put(pack.getPackageId(), pack);
                 })
                 .build();
