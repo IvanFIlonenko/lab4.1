@@ -25,7 +25,7 @@ public class SolveTestActor extends AbstractActor {
             Invocable invocable = (Invocable) engine;
             String res = invocable.invokeFunction(pack.getFunctionName(), pack.getTests()[index].getParams()).toString();
             pack.writeResult(index, res);
-            System.out.println(pack.getTests()[index].getResult());
+            System.out.println(res);
             getSender().tell(pack, ActorRef.noSender());
         }).build();
     }
