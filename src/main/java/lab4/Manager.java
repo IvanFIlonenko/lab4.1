@@ -20,6 +20,6 @@ public class Manager extends AbstractActor {
             for(int i=0; i<pack.getTests().length; i++){
                 executors.tell(new Message(i,pack), storage);
             }
-        }).match(Message.class, request -> storage.tell(request, sender())).build();
+        }).match(GetResult.class, request -> storage.tell(request, sender())).build();
     }
 }
