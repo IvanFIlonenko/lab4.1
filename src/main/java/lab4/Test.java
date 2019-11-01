@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 class Test {
     private final String testName;
-    private final float expectedResult;
+    private final String expectedResult;
     private final Object[] params;
     private String result;
     private String check;
@@ -15,7 +15,7 @@ class Test {
                 @JsonProperty("expectedResult") String expectedResult,
                 @JsonProperty("params") Object[] params){
         this.testName= testName;
-        this.expectedResult = Float.parseFloat(expectedResult);
+        this.expectedResult = expectedResult;
         this.params = params;
         this.result = "NONE";
         this.check = "false";
@@ -25,7 +25,7 @@ class Test {
         return testName;
     }
 
-    public float getExpectedResult(){
+    public String getExpectedResult(){
         return expectedResult;
     }
 
