@@ -46,5 +46,5 @@ public class JsonPackage {
         tests[index].writeResult(result);
     }
 
-    public void writeCheck(int index){tests[index].}
+    public void writeCheck(int index){tests[index].writeCheck();}
 }
