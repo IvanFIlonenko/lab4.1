@@ -35,7 +35,7 @@ public class SolveTestActor extends AbstractActor {
             params = params.substring(0, params.length()-1);
             List<Object> objectList = new ArrayList<Object>();
             objectList.add(Arrays.asList(pack.getTests()[index].getParams()));
-            String res = invocable.invokeFunction(pack.getFunctionName(), obj).toString();
+            String res = invocable.invokeFunction(pack.getFunctionName(), pack.getTests()[index].getParams()).toString();
             pack.writeResult(index, res);
             System.out.println(res);
             getSender().tell(pack, ActorRef.noSender());
