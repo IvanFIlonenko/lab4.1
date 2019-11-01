@@ -1,13 +1,8 @@
-/*
- * Copyright (C) 2009-2019 Lightbend Inc. <https://www.lightbend.com>
- */
-
 package lab4;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
 
 public class JsonPackage {
     private final int packageId;

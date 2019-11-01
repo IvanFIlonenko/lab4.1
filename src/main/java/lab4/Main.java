@@ -63,6 +63,6 @@ public class Main extends AllDirectives {
 
         binding
                 .thenCompose(ServerBinding::unbind)
-                .thenAccept(unbound -> system.terminate()); 
+                .thenAccept(unbound -> system.terminate());
     }
 }
