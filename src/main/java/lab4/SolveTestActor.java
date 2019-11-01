@@ -23,9 +23,15 @@ public class SolveTestActor extends AbstractActor {
             } catch (ScriptException e){
             }
             Invocable invocable = (Invocable) engine;
+            String params = "";
+            for(int i=0; i<pack.getTests()[index].getParams().length; i++){
+                params += pack.getTests()[index].getParams()[i] + ",";
+            }
+            params = params.substring(0, params.length()-1);
+
             String res = invocable.invokeFunction(pack.getFunctionName(), pack.getTests()[index].getParams()).toString();
             pack.writeResult(index, res);
-            System.out.println(res);
+            System.out.println(params);
             getSender().tell(pack, ActorRef.noSender());
         }).build();
     }
