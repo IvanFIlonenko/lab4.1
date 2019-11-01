@@ -45,7 +45,7 @@ public class Main extends AllDirectives {
 
 
     //#unmarshall
-    public Route appRoute() {
+    private Route appRoute() {
         return concat(
                 get(
                         () -> parameter("packageId", (packageId)->
