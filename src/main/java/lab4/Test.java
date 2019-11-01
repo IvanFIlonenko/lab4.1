@@ -16,7 +16,7 @@ class Test {
         this.testName= testName;
         this.expectedResult = Float.parseFloat(expectedResult);
         this.params = params;
-        this.result = "";
+        this.result = "NONE";
     }
 
     public String getTestName(){
