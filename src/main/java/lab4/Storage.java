@@ -3,7 +3,6 @@ package lab4;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.japi.pf.ReceiveBuilder;
-import com.sun.tools.javac.util.Pair;
 
 import java.util.*;
 
@@ -12,7 +11,7 @@ public class Storage extends AbstractActor {
 
     public Receive createReceive() {
         return ReceiveBuilder.create().match(GetResult.class,
-                request -> getSender().tell(new Pair<Integer,ArrayList<TestResult>>(request.getPackageId(),data.get(request.getPackageId())), ActorRef.noSender()))
+                request -> getSender().tell(data.get(request.getPackageId()).toArray(), ActorRef.noSender()))
                 .match(StorageTestResult.class, msg -> {
                     if (data.containsKey(msg.getPackageId())){
                         ArrayList<TestResult> tests = data.get(msg.getPackageId());
