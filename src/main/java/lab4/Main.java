@@ -21,13 +21,20 @@ import java.util.concurrent.CompletionStage;
 
 public class Main extends AllDirectives {
 
+    private static final String SUCCESS_MESSAGE  = "You sent successfully!";
+    private static final String PACKAGE_ID = "packageId";
+    private static final String ROUTES = "routes";
+    private static final String LOCALHOST = "localhost";
+    private static final int PORT = 8080;
+    private static final String SERVER_ONLINE_MESSAGE = "Server online at http://localhost:8080/\nPress RETURN to stop...";
+
     static ActorRef manager;
 
 
     private Route appRoute() {
         return concat(
                 get(
-                        () -> parameter("packageId", (packageId) ->
+                        () -> parameter(PACKAGE_ID, (packageId) ->
                                 {
                                     Future<Object> result = Patterns.ask(manager, new GetResult(Integer.parseInt(packageId)), 5000);
                                     return completeOKWithFuture(result, Jackson.marshaller());
@@ -38,7 +45,7 @@ public class Main extends AllDirectives {
                         () -> entity(Jackson.unmarshaller(JsonPackage.class),
                                 message -> {
                                     manager.tell(message, ActorRef.noSender());
-                                    return complete("You sent successfully!");
+                                    return complete(SUCCESS_MESSAGE);
                                 }
                         )
                 )
@@ -46,7 +53,7 @@ public class Main extends AllDirectives {
     }
 
     public static void main(String[] args) throws Exception {
-        ActorSystem system = ActorSystem.create("routes");
+        ActorSystem system = ActorSystem.create(ROUTES);
         manager = system.actorOf(Props.create(Manager.class));
 
         final Http http = Http.get(system);
@@ -56,9 +63,9 @@ public class Main extends AllDirectives {
 
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = app.appRoute().flow(system, materializer);
         final CompletionStage<ServerBinding> binding = http.bindAndHandle(routeFlow,
-                ConnectHttp.toHost("localhost", 8080), materializer);
+                ConnectHttp.toHost(LOCALHOST, PORT), materializer);
 
-        System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
+        System.out.println(SERVER_ONLINE_MESSAGE);
         System.in.read();
 
         binding
