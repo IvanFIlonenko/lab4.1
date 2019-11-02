@@ -22,7 +22,8 @@ public class Storage extends AbstractActor {
                         tests.add(msg.getTestResult());
                         data.put(msg.getPackageId(), tests);
                     }
-                    
+                    System.out.println(data.get(msg.getPackageId()).get(0).getTestName());
+                    System.out.println(msg.getPackageId());
                 })
                 .build();
     }
