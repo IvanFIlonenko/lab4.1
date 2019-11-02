@@ -12,13 +12,14 @@ import javax.script.ScriptException;
 
 
 public class SolveTestActor extends AbstractActor {
+    private static final String JS_ENGINE = "nashorn";
 
     public Receive createReceive(){
         return ReceiveBuilder.create().match(Message.class, message -> {
             Pair<Integer, JsonPackage> msg = message.getMessage();
             int index = msg.getKey();
             JsonPackage pack = msg.getValue();
-            ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+            ScriptEngine engine = new ScriptEngineManager().getEngineByName(JS_ENGINE);
             try {
                 engine.eval(pack.getJsScript());
             } catch (ScriptException e){
