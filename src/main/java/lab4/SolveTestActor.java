@@ -32,7 +32,7 @@ public class SolveTestActor extends AbstractActor {
                 check = "true";
             }
             TestResult testResult = new TestResult(test.getTestName(), test.getExpectedResult(), test.getParams(), res, check);
-            StorageTestResult storageTestResult = new StorageTestResult(index, testResult);
+            StorageTestResult storageTestResult = new StorageTestResult(pack.getPackageId(), testResult);
             getSender().tell(storageTestResult, ActorRef.noSender());
         }).build();
     }
