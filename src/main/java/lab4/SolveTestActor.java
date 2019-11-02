@@ -16,9 +16,9 @@ public class SolveTestActor extends AbstractActor {
 
     public Receive createReceive(){
         return ReceiveBuilder.create().match(Message.class, message -> {
-            Pair<Integer, JsonPackage> msg = message.getMessage();
+            Pair<Integer, FunctionPackage> msg = message.getMessage();
             int index = msg.getKey();
-            JsonPackage pack = msg.getValue();
+            FunctionPackage pack = msg.getValue();
             Test test = pack.getTests()[index];
             ScriptEngine engine = new ScriptEngineManager().getEngineByName(JS_ENGINE);
             try {
@@ -31,9 +31,9 @@ public class SolveTestActor extends AbstractActor {
             if (res.equals(test.getExpectedResult())) {
                 check = "true";
             }
-            TestResult result = new TestResult(test.getTestName(), test.getExpectedResult(), test.getParams(), res, check);
-            pack.writeResult(index, res);
-            getSender().tell(pack, ActorRef.noSender());
+            TestResult testResult = new TestResult(test.getTestName(), test.getExpectedResult(), test.getParams(), res, check);
+            StorageTestResult storageTestResult = new StorageTestResult(index, testResult);
+            getSender().tell(storageTestResult, ActorRef.noSender());
         }).build();
     }
 }

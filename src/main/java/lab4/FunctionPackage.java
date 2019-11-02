@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class JsonPackage {
+public class FunctionPackage {
     private static final String PACKAGE_ID = "packageId";
     private static final String JS_SCRIPT = "jsScript";
     private static final String FUNCTION_NAME = "functionName";
@@ -15,10 +15,10 @@ public class JsonPackage {
     private final Test[] tests;
 
     @JsonCreator
-    public JsonPackage(@JsonProperty(PACKAGE_ID) String packageId,
-                       @JsonProperty(JS_SCRIPT) String jsScript,
-                       @JsonProperty(FUNCTION_NAME) String functionName,
-                       @JsonProperty(TESTS) Test[] tests) {
+    public FunctionPackage(@JsonProperty(PACKAGE_ID) String packageId,
+                           @JsonProperty(JS_SCRIPT) String jsScript,
+                           @JsonProperty(FUNCTION_NAME) String functionName,
+                           @JsonProperty(TESTS) Test[] tests) {
         this.packageId = Integer.parseInt(packageId);
         this.jsScript= jsScript;
         this.functionName = functionName;

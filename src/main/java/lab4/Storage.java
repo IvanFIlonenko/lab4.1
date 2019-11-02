@@ -12,8 +12,17 @@ public class Storage extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create().match(GetResult.class,
                 request -> getSender().tell(data.get(request.getPackageId()), ActorRef.noSender()))
-                .match(JsonPackage.class, pack -> {
-                    data.put(pack.getPackageId(), pack);
+                .match(StorageTestResult.class, msg -> {
+                    if (data.containsKey(msg.getPackageId())){
+                        ArrayList<TestResult> tests = new ArrayList<>(); 
+                        tests.add(msg.getTestResult());
+                        data.put(msg.getPackageId(), tests);
+                    } else {
+                        ArrayList<TestResult> tests = data.get(msg.getPackageId());
+                        tests.add(msg.getTestResult());
+                        data.put(msg.getPackageId(), tests);
+                    }
+                    
                 })
                 .build();
     }

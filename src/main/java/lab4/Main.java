@@ -42,7 +42,7 @@ public class Main extends AllDirectives {
                         )
                 ),
                 post(
-                        () -> entity(Jackson.unmarshaller(JsonPackage.class),
+                        () -> entity(Jackson.unmarshaller(FunctionPackage.class),
                                 message -> {
                                     manager.tell(message, ActorRef.noSender());
                                     return complete(SUCCESS_MESSAGE);
