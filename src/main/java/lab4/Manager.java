@@ -9,9 +9,10 @@ import akka.routing.RoundRobinPool;
 public class Manager extends AbstractActor {
     private final ActorRef executors;
     private final ActorRef storage;
+    private final int NUMBER_OF_POOLS = 5;
 
     public Manager(){
-        executors = getContext().actorOf(new RoundRobinPool(5).props(Props.create(SolveTestActor.class)));
+        executors = getContext().actorOf(new RoundRobinPool(NUMBER_OF_POOLS).props(Props.create(SolveTestActor.class)));
         storage = getContext().actorOf(Props.create(Storage.class));
     }
 
