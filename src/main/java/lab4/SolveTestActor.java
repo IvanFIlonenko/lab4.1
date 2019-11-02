@@ -19,16 +19,19 @@ public class SolveTestActor extends AbstractActor {
             Pair<Integer, JsonPackage> msg = message.getMessage();
             int index = msg.getKey();
             JsonPackage pack = msg.getValue();
+            Test test = pack.getTests()[index];
             ScriptEngine engine = new ScriptEngineManager().getEngineByName(JS_ENGINE);
             try {
                 engine.eval(pack.getJsScript());
             } catch (ScriptException e){
             }
             Invocable invocable = (Invocable) engine;
-            String res = invocable.invokeFunction(pack.getFunctionName(), pack.getTests()[index].getParams()).toString();
-            if (res.equals(pack.getTests()[index].getExpectedResult())) {
-                pack.writeCheck(index);
+            String res = invocable.invokeFunction(pack.getFunctionName(), test.getParams()).toString();
+            String check = "false";
+            if (res.equals(test.getExpectedResult())) {
+                check = "true";
             }
+            TestResult result = new TestResult(test.getTestName(), test.getExpectedResult(), test.getParams(), res, check);
             pack.writeResult(index, res);
             getSender().tell(pack, ActorRef.noSender());
         }).build();
