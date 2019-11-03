@@ -10,8 +10,9 @@ public class Storage extends AbstractActor {
     private HashMap<Integer,ArrayList<TestResult>> data = new HashMap<>();
 
     public Receive createReceive() {
-        return ReceiveBuilder.create().match(GetResult.class,
-                request -> getSender().tell(data.get(request.getPackageId()).toArray(), ActorRef.noSender()))
+        return ReceiveBuilder.create()
+                .match(GetResult.class,
+                        request -> getSender().tell(data.get(request.getPackageId()).toArray(), ActorRef.noSender()))
                 .match(StorageTestResult.class, msg -> {
                     if (data.containsKey(msg.getPackageId())){
                         ArrayList<TestResult> tests = data.get(msg.getPackageId());
